@@ -14,7 +14,7 @@ link_list=[]
 title=soup.find_all('td',attrs = {'class':'titleColumn'})
 ratings=soup.find_all('td',attrs={'class':'ratingColumn imdbRating'})
 data1={'title':[],'ratings':[],'year':[]}
-for r in range(len(3)):
+for r in range(len(title)):
     data1['title'].append(title[r].a.text)
     data1['year'].append(title[r].span.text)
     data1['ratings'].append(ratings[r].strong.text)
