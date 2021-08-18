@@ -13,24 +13,24 @@ link_list=[]
 # links =soup.find('tbody') 
 title=soup.find_all('td',attrs = {'class':'titleColumn'})
 ratings=soup.find_all('td',attrs={'class':'ratingColumn imdbRating'})
-data1={'title':[],'ratings':[],'year':[]}
-for r in range(len(title)):
-    data1['title'].append(title[r].a.text)
-    data1['year'].append(title[r].span.text)
-    data1['ratings'].append(ratings[r].strong.text)
+#data1={'title':[],'ratings':[],'year':[]}
+# for r in range(len(title)):
+#     data1['title'].append(title[r].a.text)
+#     data1['year'].append(title[r].span.text)
+#     data1['ratings'].append(ratings[r].strong.text)
 
 for i in range(len(title)):       
     link_list.append(title[i].a.get('href'))
     
-data2={'duration':[],'Description':[]}
+#data2={'duration':[],'Description':[]}
 for i in range(len(title)):
     r2=requests.get("https://www.imdb.com/{0}".format(link_list[i]))
     soup2 = BeautifulSoup (r2.content,'lxml')
     duration= soup2.find_all('li',attrs={'class':'ipc-inline-list__item'})
-    data2['duration'].append(duration[2].text)
+    #data2['duration'].append(duration[2].text)
     description= soup2.find('span',attrs={'class':'GenresAndPlot__TextContainerBreakpointXS_TO_M-cum89p-0 dcFkRD'})
-    data2['Description'].append(description.text)
-    Api(movie_name=data1['title'][i],movie_year=data1['year'][i],movie_rating=data1['ratings'][i],movie_duration=data2['duration'][i],movie_description=data2['Description'][i]).save()
+   # data2['Description'].append(description.text)
+    Api(movie_name=title[i].a.text,movie_year=title[i].span.text,movie_rating=ratings[i].strong.text,movie_duration=duration[2].text,movie_description=description.text).save()
 
 
 def index(request):
