@@ -1,5 +1,6 @@
+from django.db import reset_queries
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, response
 import json
 from bs4 import BeautifulSoup
 from .models import Api
@@ -33,44 +34,44 @@ import requests
 #     Api(movie_name=title[i].a.text,movie_year=title[i].span.text,movie_rating=ratings[i].strong.text,movie_duration=duration[2].text,movie_description=description.text).save()
 
 
-def index(request):
-    response=json.dumps([{}])
-    return HttpResponse(response,content_type='text/json')
-
-def movie(request):
-    data=Api.objects.all()
-    response=[{}]
-    for i in data:
-        response.append([{'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description }])
-    return HttpResponse(json.dumps(response),content_type='text/json')
+def movies(request):
+    response=[]
+    if request.GET['title']:
+        title=request.GET['title']
+        data=Api.objects.filter(movie_name__contains=title)
+        for i in data:
+            response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+        return HttpResponse(json.dumps(response),content_type='text/json')
     
-def get_movie_id(request,r_id):
-    data=Api.objects.get(id=r_id)
-    response=json.dumps([{'title':data.movie_name,'year':data.movie_year,'ratings':data.movie_rating,'duration':data.movie_duration,'description':data.movie_description}])
-    return HttpResponse(response,content_type='text/json')
+    elif request.GET['title']=='':
+        title=request.GET['title']
+        data=Api.objects.all().order_by('movie_name')
+        for i in data:
+            response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+        return HttpResponse(json.dumps(response),content_type='text/json')
 
-def get_movie(request,title):
+    elif request.GET['title'] and request.GET['ord']:
+        title=request.GET['title']
+        data=Api.objects.filter(movie_name__contains=title).order_by('movie_name')
+        for i in data:
+            response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+        return HttpResponse(json.dumps(response),content_type='text/json')
 
-    data=Api.objects.filter(movie_name__contains=title,movie_name__startswith=title)
-    response=[{}]
-    for i in data:
-        response.append([{'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description }])
-   # response=json.dumps([{'title':data.movie_name,'year':data.movie_year,'ratings':data.movie_rating,'duration':data.movie_duration,'description':data.movie_description}])
-    
-    return HttpResponse(response,content_type='text/json')
+    elif request.GET['title'] and request.GET['descr']:
+        title=request.GET['title']
+        description=request.GET['descr']
+        data=Api.objects.filter(movie_name__contains=title,movie_description__contains=description)
+        for i in data:
+            response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+        return HttpResponse(json.dumps(response),content_type='text/json')
 
-def get_movie_description(request,desc):
-    data=Api.objects.filter(movie_description__contains=desc)
-    response=[{}]
-    for i in data:
-        response.append([{'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description }])
-   # response=json.dumps([{'title':data.movie_name,'year':data.movie_year,'ratings':data.movie_rating,'duration':data.movie_duration,'description':data.movie_description}])
-    
-    return HttpResponse(response,content_type='text/json')
-
-
-
-
+    elif request.GET['title'] and request.GET['descr'] and request.GET['ord']:
+        title=request.GET['title']
+        description=request.GET['descr']
+        data=Api.objects.filter(movie_name__contains=title,movie_description__contains=description).all().order_by('movie_name')
+        for i in data:
+            response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+        return HttpResponse(json.dumps(response),content_type='text/json')
 
 
 
