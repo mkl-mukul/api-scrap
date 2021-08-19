@@ -23,5 +23,6 @@ urlpatterns = [
     path('',views.index,name='index'),
     path('api/movies/',views.movie,name="all_movie"),
     path('api/movies/<int:r_id>',views.get_movie_id,name='movies'),
-    path('api/movies/<str:title>',views.get_movie,name='movies_title')
+    path('api/movies/<str:title>',views.get_movie,name='movies_title'),
+    path('api/movies/desc/<str:desc>',views.get_movie_description,name='movie_desc')
 ]
