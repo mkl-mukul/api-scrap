@@ -74,8 +74,6 @@ def movies(request):
             return HttpResponse(json.dumps(response),content_type='text/json')
         else:
             return HttpResponse("invalid order ")
-            
-
     elif title and description and order:
         if order == "movie_name" or order == "movie_rating" or order == "movie_year" or order == "movie_duration":
             data=Api.objects.filter(movie_name__contains=title,movie_description__contains=description)
@@ -85,7 +83,7 @@ def movies(request):
             return HttpResponse(json.dumps(response),content_type='text/json')
         else:
             return HttpResponse("invalid order ")
-            
+
     elif description:
         data=Api.objects.filter(movie_description__contains=description)
         for i in data:
