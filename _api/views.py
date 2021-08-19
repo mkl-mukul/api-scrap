@@ -52,7 +52,8 @@ def movies(request):
 
     elif request.GET['title'] and request.GET['ord']:
         title=request.GET['title']
-        data=Api.objects.filter(movie_name__contains=title).order_by('movie_name')
+        ord=request.GET['ord']
+        data=Api.objects.filter(movie_name__contains=title).order_by(ord)
         for i in data:
             response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
         return HttpResponse(json.dumps(response),content_type='text/json')
@@ -68,7 +69,8 @@ def movies(request):
     elif request.GET['title'] and request.GET['descr'] and request.GET['ord']:
         title=request.GET['title']
         description=request.GET['descr']
-        data=Api.objects.filter(movie_name__contains=title,movie_description__contains=description).all().order_by('movie_name')
+        ord=request.GET['ord']
+        data=Api.objects.filter(movie_name__contains=title,movie_description__contains=description).all().order_by(ord)
         for i in data:
             response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
         return HttpResponse(json.dumps(response),content_type='text/json')
