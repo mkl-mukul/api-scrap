@@ -9,3 +9,5 @@ class Api(models.Model):
     movie_duration = models.CharField(max_length=10)
     movie_description = models.CharField(max_length=700)
 
+    def __str__(self):
+        return f"{self.movie_name} - {self.movie_rating} - {self.movie_year}-{self.movie_duration}-{self.movie_description}"

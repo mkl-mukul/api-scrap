@@ -40,21 +40,33 @@ def movies(request):
     description=request.GET.get('desc')
     response=[]
 
-    if title=="":
+
+
+    if order:
+        data=Api.objects.filter(movie_name__contains=title)
+        data=data.order_by(order)
+        for i in data:
+            b=i.movie_year
+            c=b.strip('()')
+            response.append({'title':i.movie_name,'year':int(c),'ratings':float(i.movie_rating),'duration':i.movie_duration,'description':i.movie_description })
+        return HttpResponse(json.dumps(response),content_type='text/json')
+    elif title=="":
         data=Api.objects.filter(movie_name__contains=title)
         data=data.order_by('movie_name')
         for i in data:
-            response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+            b=i.movie_year
+            c=b.strip('()')
+            response.append({'title':i.movie_name,'year':int(c),'ratings':float(i.movie_rating),'duration':i.movie_duration,'description':i.movie_description })
         return HttpResponse(json.dumps(response),content_type='text/json')
-    elif description=="":
-        return HttpResponse("invalid description")
 
     elif title and order:
         if order == "movie_name" or order == "movie_rating" or order == "movie_year" or order == "movie_duration":
             data=Api.objects.filter(movie_name__contains=title)
             data=data.order_by(order)
             for i in data:
-                response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+                b=i.movie_year
+                c=b.strip('()')
+                response.append({'title':i.movie_name,'year':int(c),'ratings':float(i.movie_rating),'duration':i.movie_duration,'description':i.movie_description })
             return HttpResponse(json.dumps(response),content_type='text/json')
         else:
            return HttpResponse("invalid order ")
@@ -62,7 +74,9 @@ def movies(request):
     elif title:
         data=Api.objects.filter(movie_name__contains=title)
         for i in data:
-            response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+            b=i.movie_year
+            c=b.strip('()')
+            response.append({'title':i.movie_name,'year':int(c),'ratings':float(i.movie_rating),'duration':i.movie_duration,'description':i.movie_description })
         return HttpResponse(json.dumps(response),content_type='text/json')
 
     elif description and order:
@@ -70,7 +84,9 @@ def movies(request):
             data=Api.objects.filter(movie_description__contains=description)
             data=data.order_by(order)
             for i in data:
-                response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+                b=i.movie_year
+                c=b.strip('()')
+                response.append({'title':i.movie_name,'year':int(c),'ratings':float(i.movie_rating),'duration':i.movie_duration,'description':i.movie_description })
             return HttpResponse(json.dumps(response),content_type='text/json')
         else:
             return HttpResponse("invalid order ")
@@ -79,21 +95,28 @@ def movies(request):
             data=Api.objects.filter(movie_name__contains=title,movie_description__contains=description)
             data=data.order_by(order)
             for i in data:
-                response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+                b=i.movie_year
+                c=b.strip('()')
+                response.append({'title':i.movie_name,'year':int(c),'ratings':float(i.movie_rating),'duration':i.movie_duration,'description':i.movie_description })
             return HttpResponse(json.dumps(response),content_type='text/json')
         else:
             return HttpResponse("invalid order ")
-
+    elif description=="":
+        return HttpResponse("invalid description")
     elif description:
         data=Api.objects.filter(movie_description__contains=description)
         for i in data:
-            response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+            b=i.movie_year
+            c=b.strip('()')
+            response.append({'title':i.movie_name,'year':int(c),'ratings':float(i.movie_rating),'duration':i.movie_duration,'description':i.movie_description })
         return HttpResponse(json.dumps(response),content_type='text/json')
 
     elif title and description:
         data=Api.objects.filter(movie_name__contains=title,movie_description__contains=description)
         for i in data:
-            response.append({'title':i.movie_name,'year':i.movie_year,'ratings':i.movie_rating,'duration':i.movie_duration,'description':i.movie_description })
+            b=i.movie_year
+            c=b.strip('()')
+            response.append({'title':i.movie_name,'year':int(c),'ratings':float(i.movie_rating),'duration':i.movie_duration,'description':i.movie_description })
         return HttpResponse(json.dumps(response),content_type='text/json')
 
 
