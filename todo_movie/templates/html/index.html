@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head><title>movie list</title></head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+table{
+    position:relative;
+    top:10px;
+    border-collapse: collapse;
+    font-size: 10px;
+  
+}
+td{
+    padding: 5px;
+}
+.form-1 {
+    border: 1px solid #333;
+    font-size: 12px;
+    padding: 5px;
+   
+}
+
+thead,tfoot {
+    background-color: #333;
+    color: #fff;
+}
+</style>
+<script>
+    $(document).ready(function () {
+$("form").submit(function (event) {
+var formData = {
+  title: $("#title").val(),
+  desc: $("#desc").val(),
+  ord: $("#ord").val(),
+};
+
+$.ajax({
+  type: "GET",
+  url: "api/movie/",
+  data: formData,
+  dataType: "json",
+  encode: true,
+}).done(function(data) {
+   
+    var table=''
+    $("tr[id*=cu]").remove()
+    $.each(data,function(key,value){
+
+        table +='<tr id="cu">'
+        table +='<td>'+ value.title +'</td>'
+        table +='<td>'+ value.ratings +'</td>'
+        table +='<td>'+ value.year +'</td>'
+        table +='<td>'+ value.description +'</td>'
+        table +='<td>'+ value.duration +'</td>'
+        table +='</tr>'
+    })
+
+    $('#tbl').append(table)
+     
+
+ // console.log(data);
+});
+event.preventDefault();
+});
+});
+</script>
+<body>
+
+
+<div class="form-1">
+<form action="api/movie/" method="get" class="form-example">
+      <label for="title">Enter movie title: </label>
+      <input type="text" name="title" id="title" >
+    
+
+      <label for="desc">Enter desc: </label>
+      <input type="text" name="desc" id="desc" ><br><br>
+    
+        <label>select order</label>
+        <input type="radio" name="ord" value="movie_name" id="ord"><label> movie_name</label> 
+        <input type="radio" name="ord" value="movie_rating" id="ord"><label> movie_rating</label>   
+        <input type="radio" name="ord" value="movie_year" id="ord"><label>movie_year</label>
+        <input type="radio" name="ord" value= "movie_duration" id="ord"><label >movie_duration</label>
+
+      <input type="submit" value="submit" id="sub">
+  
+  </form>
+</div>
+  <div id="container">
+    <table id="tbl" border="1">
+        <thead ><tr><th colspan="5">Movie details</th></tr></thead>
+        <tbody>
+        <tr>
+            <th>title</th>
+            <th>rating</th>
+            <th>year</th>
+            <th>description</th>
+            <th>duration</th>
+        </tr>
+    </tbody>
+    </table>
+  </div>
+</body>
+  </html>

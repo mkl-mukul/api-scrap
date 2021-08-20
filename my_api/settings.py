@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     '_api',
+    'todo_movie',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
