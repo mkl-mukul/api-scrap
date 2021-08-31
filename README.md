@@ -1,5 +1,4 @@
-# first
-do this after clone this project 
+
 
 # how to use django prometheus in this project 
 first install django-prometheus package 
