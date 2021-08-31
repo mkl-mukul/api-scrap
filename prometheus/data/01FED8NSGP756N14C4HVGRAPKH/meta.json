@@ -1,0 +1,17 @@
+{
+	"ulid": "01FED8NSGP756N14C4HVGRAPKH",
+	"minTime": 1630347959293,
+	"maxTime": 1630353600000,
+	"stats": {
+		"numSamples": 82936,
+		"numSeries": 1686,
+		"numChunks": 1686
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01FED8NSGP756N14C4HVGRAPKH"
+		]
+	},
+	"version": 1
+}
