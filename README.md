@@ -27,8 +27,8 @@ http://127.0.0.1:9090/
 for latest version [node_exporter](https://prometheus.io/download/#node_exporter)
 
 ## start node_exporter
-#go to node_exporter folder
-#yes you can make systemd service for execution 
+# go to node_exporter folder
+# yes you can make systemd service for execution 
 ```bash
 ./node_exporter
 ```
