@@ -14,6 +14,9 @@ python manage.py runserver
 # in your browser
 localhost:8000/metrics
 ```
+# dowload latest version prometheus 
+[prometheus](https://prometheus.io/download/)
+
 # go to prometheus folder in terminal
 ```bash
 ./prometheus --config.file=prometheus.yml
@@ -33,7 +36,7 @@ for latest version [node_exporter](https://prometheus.io/download/#node_exporter
 ./node_exporter
 ```
 
-# you can add new job in prometheus.yml 
+# add new job in prometheus.yml 
 ```yaml
 global:
   scrape_interval: 15s 
@@ -54,8 +57,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9100']
 ```
-# dowload latest version prometheus 
-[prometheus](https://prometheus.io/download/)
+
 
 # grafana 
 #### you can add your prometheus datasource in grafana for dashboard monitoring 
