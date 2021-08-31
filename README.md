@@ -1,6 +1,6 @@
 
 
-# how to use django prometheus in this project 
+# how i use django prometheus in this project 
 first install django-prometheus package 
 
 ```bash 
