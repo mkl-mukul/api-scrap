@@ -66,7 +66,7 @@ scrape_configs:
 [prometheus](https://prometheus.io/download/)
 
 # grafana 
-you cann add your prometheus datasource in grafana for dashboard monitoring 
+#### you can add your prometheus datasource in grafana for dashboard monitoring 
 you can see how to install grafana from here [grafana](https://grafana.com/docs/grafana/latest/installation/)
 
 ## prometheus visualization in grafana 
