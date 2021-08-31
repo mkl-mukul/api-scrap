@@ -1,7 +1,7 @@
-#first
-after clone this project 
+# first
+do this after clone this project 
 
-# how to use django prometheus 
+# how to use django prometheus in this project 
 first install django-prometheus package 
 
 ```bash 
@@ -21,6 +21,16 @@ localhost:8000/metrics
 ## in browser you browser you can check
 ```bash
 http://127.0.0.1:9090/
+```
+
+## for node_exporter
+for latest version [node_exporter](https://prometheus.io/download/#node_exporter)
+
+## for start node_exporter
+#go to node_exporter folder
+#yes you can make systemd service for execution 
+```bash
+./node_exporter
 ```
 
 ## you can add new job in prometheus.yml 
@@ -52,11 +62,19 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9100']
 ```
-##dowload latest prometheus 
+##dowload latest version prometheus 
 [prometheus](https://prometheus.io/download/)
 
 ## grafana 
 you cann add your prometheus datasource in grafana for dashboard monitoring 
+you can see how to install grafana from here [grafana](https://grafana.com/docs/grafana/latest/installation/)
+
+# prometheus visualization in grafana 
+for how to add datasource in [grafana](https://prometheus.io/docs/visualization/grafana/)
+
+## django-prometheus 
+for more information checkout this [django-prometheus](https://github.com/korfuri/django-prometheus)
+
 
 
 
