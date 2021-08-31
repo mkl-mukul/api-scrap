@@ -18,7 +18,7 @@ localhost:8000/metrics
 ```bash
 ./prometheus --config.file=prometheus.yml
 ```
-## in browser you browser you can check
+## in browser you can check
 ```bash
 http://127.0.0.1:9090/
 ```
@@ -26,7 +26,7 @@ http://127.0.0.1:9090/
 ## for node_exporter
 for latest version [node_exporter](https://prometheus.io/download/#node_exporter)
 
-## for start node_exporter
+## start node_exporter
 #go to node_exporter folder
 #yes you can make systemd service for execution 
 ```bash
@@ -62,14 +62,14 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9100']
 ```
-##dowload latest version prometheus 
+## dowload latest version prometheus 
 [prometheus](https://prometheus.io/download/)
 
 ## grafana 
 you cann add your prometheus datasource in grafana for dashboard monitoring 
 you can see how to install grafana from here [grafana](https://grafana.com/docs/grafana/latest/installation/)
 
-# prometheus visualization in grafana 
+## prometheus visualization in grafana 
 for how to add datasource in [grafana](https://prometheus.io/docs/visualization/grafana/)
 
 ## django-prometheus 
